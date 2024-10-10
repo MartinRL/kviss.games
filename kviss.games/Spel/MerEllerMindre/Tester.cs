@@ -1,9 +1,8 @@
-﻿namespace kviss.games.Spel.MerEllerMindre.Omgång;
+﻿namespace kviss.games.Spel.MerEllerMindre.Omgång; 
 
-using System;
 using FluentAssertions;
-using FluentAssertions.Equivalency;
 using Xunit;
+using static SystemGuid;
 using Frågor = ISet<Fråga>;
 
 public class OmgångSkall
@@ -12,14 +11,16 @@ public class OmgångSkall
 
     public readonly Spelare Spelmästare = new("Martin");
 
+    public OmgångSkall() => NewGuid = () => Guid.Empty;
+
     [Fact]
     public void Startas()
     {
-        Skapa skapa = new (Spelmästare, EnFråga);
-
         Tillstånd.Initialt
-        .Besluta(skapa)
+        .Besluta(new Skapa(NewGuid(), Spelmästare, EnFråga))
         .Should()
-        .Equal(new Skapad(skapa.Id, Spelmästare, EnFråga).ToArray());
+        .Equal(new Skapad(new Skapa(NewGuid(), Spelmästare, EnFråga).Id, Spelmästare, EnFråga).ToArray());
     }
+
+    ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
 }
