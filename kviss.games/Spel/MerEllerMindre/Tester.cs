@@ -4,6 +4,7 @@ using FluentAssertions;
 using Xunit;
 using static SystemGuid;
 using Frågor = ISet<Fråga>;
+using Ställning = Dictionary<string, ushort>;
 
 public class OmgångSkall
 {
@@ -16,15 +17,17 @@ public class OmgångSkall
     [Fact]
     public void Startas()
     {
-        Beslutare
-        .Besluta(new Skapa(NewGuid(), Spelmästare, EnFråga))
-        .Should()
-        .Equal(new Skapad(new Skapa(NewGuid(), Spelmästare, EnFråga).Id, Spelmästare, EnFråga).ToArray());
+        var händelser = Tillstånd.Initialt
+        .Besluta(new Skapa(Spelmästare, EnFråga));
 
-        Beslutare
-        .Tillstånd
+        händelser
         .Should()
-        .Be(new Tillstånd(new Dictionary<string, ushort>(), true, false));
+        .Equal(new Skapad(NewGuid(),this.Spelmästare, this.EnFråga).ToArray());
+
+        händelser
+        .Aggregera()
+        .Should()
+        .Be(new Tillstånd([], true, false));
     }
 
     ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
