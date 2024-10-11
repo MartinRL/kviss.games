@@ -5,6 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kviss.games", "kviss.games\kviss.games.csproj", "{B8F19AB0-F259-4755-9885-D2CEFFFDCCAB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{882B1DBE-CFF4-43C3-A993-08BFBB2CF724}"
+	ProjectSection(SolutionItems) = preProject
+		deciderthinkbeforecoding.svg = deciderthinkbeforecoding.svg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
