@@ -1,4 +1,4 @@
-﻿namespace kviss.games.Spel.MerEllerMindre.Omgång; 
+﻿namespace kviss.games.Spel.MerEllerMindre.Omgång;
 
 using FluentAssertions;
 using Xunit;
@@ -16,10 +16,15 @@ public class OmgångSkall
     [Fact]
     public void Startas()
     {
-        Tillstånd.Initialt
+        Beslutare
         .Besluta(new Skapa(NewGuid(), Spelmästare, EnFråga))
         .Should()
         .Equal(new Skapad(new Skapa(NewGuid(), Spelmästare, EnFråga).Id, Spelmästare, EnFråga).ToArray());
+
+        Beslutare
+        .Tillstånd
+        .Should()
+        .Be(new Tillstånd(new Dictionary<string, ushort>(), true, false));
     }
 
     ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
