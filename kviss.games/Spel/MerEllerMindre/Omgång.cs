@@ -19,7 +19,7 @@ public record Spelare(string Namn);
 public record Fråga(string Kategori, string Jämförelse, string Enhet, string Jämförelsefråga, string Deltafråga, string Alt1Namn, int Alt1Tal, string Alt2Namn, int Alt2Tal);
 
 // händelser
-public interface IHändelse { } // used to mimic a discriminated union
+public interface IHändelse { Guid Id { get; } } // "used to mimic a discriminated union", dvs returnera olika typer
 
 public record Skapad(Guid Id, Spelare Spelmästare, Frågor Frågor) : IHändelse;
 
@@ -60,6 +60,12 @@ public static class Beslutare // functionell kärna (functional core)
     
     private static Händelser Skapa(Skapa k) =>
         new Skapad(NewGuid(), k.Spelmästare, k.Frågor).TillHändelser();
+}
+
+public static class Vyer // in-memory DB (till att börja med)
+{
+    public static Guid OmgångId(this Händelser @this) =>
+        @this.First().Id;
 }
 
 // händelseförråd
