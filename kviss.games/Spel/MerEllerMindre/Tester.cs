@@ -28,9 +28,8 @@ public class OmgångSkall
     {
         new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
         .Aggregera()
-        .ÄrSkapad
         .Should()
-        .BeTrue();
+        .BeEquivalentTo(new Tillstånd([], true, false));
     }
 
     ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
