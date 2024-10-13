@@ -4,6 +4,7 @@ using FluentAssertions;
 using Xunit;
 using static SystemGuid;
 using Frågor = ISet<Fråga>;
+using Händelser = HashSet<IHändelse>;
 using Ställning = Dictionary<string, ushort>;
 
 public class OmgångSkall
@@ -15,22 +16,25 @@ public class OmgångSkall
     public OmgångSkall() => NewGuid = () => Guid.Empty;
 
     [Fact]
-    public void givet_initialt_tillstånd_när_skapa_så_händer_skapad()
-    {
+    public void givet_initialt_tillstånd_när_skapa_så_händer_skapad() => 
         Tillstånd.Initialt
         .Besluta(new Skapa(Spelmästare, EnFråga))
         .Should()
         .Equal(new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser());
-    }
 
     [Fact]
-    public void givet_skapad_så_är_tillståndet_skapad()
-    {
+    public void givet_skapad_så_är_tillståndet_skapad() => 
         new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
         .Aggregera()
         .Should()
         .BeEquivalentTo(new Tillstånd([], true, false));
-    }
+
+    [Fact]
+    public void givet_skapad_så_är_omgångs_id_tillgängligt() =>
+        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
+        .OmgångId()
+        .Should()
+        .Be(Guid.Empty);
 
     ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
 }
