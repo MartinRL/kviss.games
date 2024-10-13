@@ -5,7 +5,7 @@ using Händelser = HashSet<IHändelse>;
 using Frågor = ISet<Fråga>;
 using Ställning = Dictionary<string, ushort>; // todo - global usings
 
-public static class Medlare
+public static class Medlare // in/ut I/O (händelser)
 {
     // tar emot kommandon (alla utom första (Skapa) har id 
 
@@ -30,12 +30,13 @@ public record Skapa(Spelare Spelmästare, Frågor Frågor) : IKommando; // guid 
 // vyer
 public interface IVy { }
 
-public record Tillstånd(Ställning Ställning, bool ÄrStartad, bool ÄrAvslutad)
+public record Tillstånd(Ställning Ställning, bool ÄrSkapad, bool ÄrAvslutad)
 {
     public static readonly Tillstånd Initialt = new([], false, false);
 }
 
-public static class Beslutare // todo: många spelare --> trådsäkerhet
+// todo: många spelare --> trådsäkerhet
+public static class Beslutare // functionell kärna (functional core)
 {
     public static Tillstånd Aggregera(this Händelser @this, Tillstånd tillstånd) =>
         @this.Aggregate(tillstånd, Utveckla);
@@ -50,19 +51,25 @@ public static class Beslutare // todo: många spelare --> trådsäkerhet
             _ => throw new InvalidOperationException()
         };
 
-    private static Tillstånd Utveckla(Tillstånd tillstånd, IHändelse händelse) => throw new NotImplementedException();
+    private static Tillstånd Utveckla(Tillstånd tillstånd, IHändelse händelse) => 
+        händelse switch
+        {
+            Skapad skapad => tillstånd with { ÄrSkapad = true },
+            _ => tillstånd
+        };
     
     private static Händelser Skapa(Skapa k) =>
-        new Skapad(NewGuid(), k.Spelmästare, k.Frågor).ToArray();
+        new Skapad(NewGuid(), k.Spelmästare, k.Frågor).TillHändelser();
 }
 
 // händelseförråd
 
-public static class HändelseFörråd
+public static class HändelseFörråd // in-memory DB (till att börja med)
 {
     private static Dictionary<Guid /* stream/omgång-id */, Händelser> händelseFörråd = [];
 
-    public static void Bifoga(IHändelse händelse) => throw new NotImplementedException();
+    public static void Bifoga(IHändelse händelse) => 
+        Bifoga(händelse.TillHändelser());
     
     public static void Bifoga(Händelser händelser) => throw new NotImplementedException();
 
@@ -79,7 +86,7 @@ public static class HändelseFörråd
 
 public static class Extensions
 {
-    public static Händelser ToArray(this IHändelse h) => [h];
+    public static Händelser TillHändelser(this IHändelse h) => [h];
 }
 
 public static class SystemGuid

@@ -15,19 +15,22 @@ public class OmgångSkall
     public OmgångSkall() => NewGuid = () => Guid.Empty;
 
     [Fact]
-    public void Startas()
+    public void givet_initialt_tillstånd_när_skapa_så_händer_skapad()
     {
-        var händelser = Tillstånd.Initialt
-        .Besluta(new Skapa(Spelmästare, EnFråga));
-
-        händelser
+        Tillstånd.Initialt
+        .Besluta(new Skapa(Spelmästare, EnFråga))
         .Should()
-        .Equal(new Skapad(NewGuid(),this.Spelmästare, this.EnFråga).ToArray());
+        .Equal(new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser());
+    }
 
-        händelser
+    [Fact]
+    public void givet_skapad_så_är_tillståndet_skapad()
+    {
+        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
         .Aggregera()
+        .ÄrSkapad
         .Should()
-        .Be(new Tillstånd([], true, false));
+        .BeTrue();
     }
 
     ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
