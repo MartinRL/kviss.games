@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Folder Name="/Diagrams/">
+    <File Path="deciderthinkbeforecoding.svg" />
+  </Folder>
+  <Project Path="kviss.games\kviss.games.csproj" />
+</Solution>
