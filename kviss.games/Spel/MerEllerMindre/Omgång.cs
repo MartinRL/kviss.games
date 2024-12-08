@@ -1,4 +1,4 @@
-﻿namespace kviss.games.Spel.MerEllerMindre.Omgång;
+﻿namespace kviss.games.Spel.MerEllerMindre;
 
 using static SystemGuid;
 using Händelser = HashSet<IHändelse>;
@@ -25,7 +25,7 @@ public record Skapad(Guid Id, Spelare Spelmästare, Frågor Frågor) : IHändels
 
 // kommandon
 public interface IKommando { }
-public record Skapa(Spelare Spelmästare, Frågor Frågor) : IKommando; // guid som en del av url:en bra då det blir omöjligt att hoppa in i andras omgångar medelst testa url:er
+public record StartaOmgång(Spelare Spelmästare, Frågor Frågor) : IKommando; // guid som en del av url:en bra då det blir omöjligt att hoppa in i andras omgångar medelst testa url:er
 
 // vyer
 public interface IVy { }
@@ -47,7 +47,7 @@ public static class Beslutare // functionell kärna (functional core)
     public static Händelser Besluta(this Tillstånd @this, IKommando kommando) =>
         kommando switch
         {
-            Skapa k => Skapa(k),
+            StartaOmgång k => Skapa(k),
             _ => throw new InvalidOperationException()
         };
 
@@ -58,7 +58,7 @@ public static class Beslutare // functionell kärna (functional core)
             _ => tillstånd
         };
     
-    private static Händelser Skapa(Skapa k) =>
+    private static Händelser Skapa(StartaOmgång k) =>
         new Skapad(NewGuid(), k.Spelmästare, k.Frågor).TillHändelser();
 }
 

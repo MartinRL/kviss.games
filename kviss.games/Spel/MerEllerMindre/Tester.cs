@@ -1,4 +1,4 @@
-﻿namespace kviss.games.Spel.MerEllerMindre.Omgång;
+﻿namespace kviss.games.Spel.MerEllerMindre;
 
 using FluentAssertions;
 using Xunit;
@@ -18,7 +18,7 @@ public class OmgångSkall
     [Fact]
     public void givet_initialt_tillstånd_när_skapa_så_händer_skapad() => 
         Tillstånd.Initialt
-        .Besluta(new Skapa(Spelmästare, EnFråga))
+        .Besluta(new StartaOmgång(Spelmästare, EnFråga))
         .Should()
         .Equal(new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser());
 

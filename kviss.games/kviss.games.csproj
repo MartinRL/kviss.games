@@ -11,6 +11,9 @@
     <Content Remove="Test\**" />
     <EmbeddedResource Remove="Test\**" />
     <None Remove="Test\**" />
+    <None Update="Data\Frågor.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +28,6 @@
 
   <ItemGroup>
     <None Update="GameQuestions\MoreOrLess\mer-eller-mindre.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Spel\MerEllerMindre\Frågor.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

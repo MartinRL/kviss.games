@@ -1,8 +1,24 @@
 ﻿@page "/merellermindre"
 
+@using kviss.games.Spel.MerEllerMindre
+@inject kviss.games.Spel.IFrågorFörvar FrågorFörvar
+
 <h3>Mer Eller Mindre</h3>
 
 <p>
-    Namn: <input type="text"/>
-    <button>Starta omgång!</button>
+    Namn: <input type="text" @bind="namn" />
+    <button @onclick="StartaOmgång">Starta omgång!</button>
 </p>
+
+@code {
+    private string namn;
+
+    private void StartaOmgång()
+    {
+        var frågor = FrågorFörvar.HämtaTioSlumpmässigt();
+        var command = new StartaOmgång(new Spelare(namn), frågor);
+        // Send the command to the appropriate handler
+        // For example, you might use a service to handle the command
+        // commandHandler.Handle(command);
+    }
+}
