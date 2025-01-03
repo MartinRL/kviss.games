@@ -1,4 +1,4 @@
-﻿kategori;jämförelse;enhet;jämförelsefråga;deltafråga;alt1_namn;alt1_tal;alt2_namn;alt2_tal
+﻿Kategori;Jämförelse;Enhet;Jämförelsefråga;Deltafråga;Alt1Namn;Alt1Tal;Alt2Namn;Alt2Tal
 musik;flest;miljoner;Vilken grupp har sålt flest album, {alt1_namn} eller {alt2_namn}?;{alt1_namn} har sålt flest album, {alt1_tal} {enhet}. Hur många färre {enhet} album har {alt2_namn} sålt?;ABBA;400;Roxette;75
 historia;först;årtal;Vilken svensk kung abdikerade först, {alt1_namn} eller {alt2_namn}?;{alt1_namn} abdikerade {alt1_tal}. Hur många {enhet} senare abdikerade {alt2_namn}?;Gustav Vasa;1560;Karl XII;1718
 historia;först;årtal;Vilken händelse inträffade först, {alt1_namn} eller {alt2_namn}?;{alt1_namn} inträffade först, år {alt1_tal}. Hur många år senare inträffade {alt2_namn}?;Stockholms blodbad;1520;Gustav Vasas kröning;1523
