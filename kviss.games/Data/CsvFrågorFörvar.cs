@@ -16,7 +16,7 @@ namespace kviss.games.Data
         public CsvFrågorFörvar()
         {
             frågor = [];
-            DeserialiseraFrågorFrånCsv(Path.Combine(AppContext.BaseDirectory + "\\Data", "Frågor.csv"));
+            DeserialiseraFrågorFrånCsv(Path.Combine(Path.Combine(AppContext.BaseDirectory, "Data"), "Frågor.csv"));
         }
 
         private void DeserialiseraFrågorFrånCsv(string filväg)
