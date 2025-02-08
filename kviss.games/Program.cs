@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddSingleton<IFrågorFörvar, CsvFrågorFörvar>();
+builder.Services.AddSingleton<IFrÃ¥gorFÃ¶rvar, CsvFrÃ¥gorFÃ¶rvar>();
 
 
 var app = builder.Build();
