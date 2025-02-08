@@ -36,7 +36,7 @@ public record Tillstånd(Ställning Ställning, bool ÄrSkapad, bool ÄrAvslutad
 }
 
 // todo: många spelare --> trådsäkerhet
-public static class Beslutare // functionell kärna (functional core)
+public static class Beslutare // funktionell kärna (functional core)
 {
     public static Tillstånd Aggregera(this Händelser @this, Tillstånd tillstånd) =>
         @this.Aggregate(tillstånd, Utveckla);
