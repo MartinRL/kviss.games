@@ -7,13 +7,13 @@ using Frågor = ISet<Fråga>;
 using Händelser = HashSet<IHändelse>;
 using Ställning = Dictionary<string, ushort>;
 
-public class OmgångSkall
+public class OmgångTester
 {
     public readonly Frågor EnFråga = new HashSet<Fråga>() { new("musik", "flest", "miljoner", "Vilken grupp har sålt flest album, {alt1_namn} eller {alt2_namn}?", "{alt1_namn} har sålt flest album, {alt1_tal} {enhet}. Hur många färre {enhet} album har { alt2_namn } sålt?", "ABBA", 400, "Roxette", 75)};
 
     public readonly Spelare Spelmästare = new("Martin");
 
-    public OmgångSkall() => NewGuid = () => Guid.Empty;
+    public OmgångTester() => NewGuid = () => Guid.Empty;
 
     [Fact]
     public void givet_initialt_tillstånd_när_skapa_så_händer_skapad() => 
@@ -36,5 +36,5 @@ public class OmgångSkall
         .Should()
         .Be(Guid.Empty);
 
-    ~OmgångSkall() => NewGuid = () => Guid.NewGuid();
+    ~OmgångTester() => NewGuid = () => Guid.NewGuid();
 }
