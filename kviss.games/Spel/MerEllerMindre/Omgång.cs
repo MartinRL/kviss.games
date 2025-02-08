@@ -59,7 +59,7 @@ public static class Beslutare // funktionell kärna (functional core)
         };
     
     private static Händelser Skapa(StartaOmgång k) =>
-        new Skapad(NewGuid(), k.Spelmästare, k.Frågor).TillHändelser();
+        new Skapad(NewGuid(), k.Spelmästare, k.Frågor).SomHändelser();
 }
 
 public static class Vyer // in-memory DB (till att börja med)
@@ -75,7 +75,7 @@ public static class HändelseFörråd // in-memory DB (till att börja med)
     private static Dictionary<Guid /* stream/omgång-id */, Händelser> händelseFörråd = [];
 
     public static void Bifoga(IHändelse händelse) => 
-        Bifoga(händelse.TillHändelser());
+        Bifoga(händelse.SomHändelser());
     
     public static void Bifoga(Händelser händelser) => throw new NotImplementedException();
 
@@ -92,7 +92,7 @@ public static class HändelseFörråd // in-memory DB (till att börja med)
 
 public static class Extensions
 {
-    public static Händelser TillHändelser(this IHändelse h) => [h];
+    public static Händelser SomHändelser(this IHändelse h) => [h];
 }
 
 public static class SystemGuid

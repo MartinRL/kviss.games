@@ -20,18 +20,18 @@ public class OmgångTester
         Tillstånd.Initialt
         .Besluta(new StartaOmgång(Spelmästare, EnFråga))
         .Should()
-        .Equal(new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser());
+        .Equal(new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).SomHändelser());
 
     [Fact]
     public void givet_skapad_så_är_tillståndet_skapad() => 
-        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
+        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).SomHändelser()
         .Aggregera()
         .Should()
         .BeEquivalentTo(new Tillstånd([], true, false));
 
     [Fact]
     public void givet_skapad_så_är_omgångs_id_tillgängligt() =>
-        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).TillHändelser()
+        new Skapad(NewGuid(), this.Spelmästare, this.EnFråga).SomHändelser()
         .OmgångId()
         .Should()
         .Be(Guid.Empty);
