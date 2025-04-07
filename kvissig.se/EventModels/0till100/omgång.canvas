@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"ce5bfb0cb7e39b29","type":"file","file":"event - omgång startad.md","x":-2280,"y":-920,"width":400,"height":400,"color":"#ffb575"},
+		{"id":"9830d27a599c8898","type":"file","file":"command - starta omgång.md","x":-2800,"y":-1660,"width":400,"height":400,"color":"#b1cffd"},
+		{"id":"7812e0731a020f72","x":-1760,"y":-1660,"width":400,"height":400,"type":"file","file":"read model - omgång-id.md","color":"#ceed9d"}
+	],
+	"edges":[
+		{"id":"208407b26fea1839","fromNode":"9830d27a599c8898","fromSide":"bottom","toNode":"ce5bfb0cb7e39b29","toSide":"top"},
+		{"id":"62ca2ad1807ac092","fromNode":"ce5bfb0cb7e39b29","fromSide":"top","toNode":"7812e0731a020f72","toSide":"bottom"}
+	]
+}
