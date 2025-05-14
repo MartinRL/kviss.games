@@ -9,7 +9,7 @@ public static class Medlare // in/ut I/O (händelser)
 {
     // tar emot kommandon (alla utom första (Skapa) har id 
 
-    // hämtar och bifogar händesler till händelseförrådet
+    // hämtar och bifogar händelser till händelseförrådet
 
     // vyer...
 }
